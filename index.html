@@ -245,8 +245,11 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
 
 /* === Visuels BROT2YOU (nov. 2026) === */
 .ic{display:inline-block;height:1.35em;width:auto;vertical-align:-.32em;object-fit:contain}
-.card .emo .ic{height:1.6em;vertical-align:middle}
+.card .emo .ic{height:2em;vertical-align:middle}
 .card.big .emo .ic{height:1.5em}
+.sec .ic{height:1.5em;vertical-align:-.4em}
+.panel h3 .ic{height:1.45em}
+.tab .ic,.btn .ic{height:1.4em;vertical-align:-.38em}
 .brand .logo-ic{height:34px;width:auto;display:block}
 .hero.hero-img{display:flex;align-items:center;gap:14px;padding:18px 18px 16px}
 .hero .hero-txt{flex:1 1 auto;min-width:0;position:relative;z-index:1}
@@ -8505,6 +8508,8 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
   var LEVELS = ["6e", "5e", "4e", "3e"];
   var LEVEL_CECRL = { "6e": "A1", "5e": "A1+ / A2", "4e": "A2", "3e": "A2+ / B1" };
 
+  function IC(n) { return "<img class='ic' src='img/" + n + ".webp' alt=''>"; }
+  function stepTitle(t) { var m = { "🚦": "step1", "🔦": "step2", "📡": "step3", "💡": "step4", "✅": "step5" }; var x = esc(t); for (var k in m) { if (x.indexOf(k) === 0) { return IC(m[k]) + " " + x.slice(k.length).replace(/^\s+/, ""); } } return x; }
   var CLUES = {
     definition: { emo: "<img class=\'ic\' src=\'img/clue-definition.webp\' alt=\'\'>", en: "Definition clue", fr: "Le mot est expliqué dans la phrase",
       look: "Cherche une explication collée au mot : une virgule, des tirets, « or », « which is », « that is », « means », « called ».",
@@ -8538,7 +8543,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
       ex: "I borrowed three books from the library." }
   };
   var CLUE_ORDER = ["definition", "example", "contrast", "situation", "wordparts", "cognates"];
-  var SKILLS = { grammar: { emo: "📡", en: "Grammar clue", fr: "La nature du mot" }, poly: { emo: "🌈", en: "One word, many meanings", fr: "La polysémie" } };
+  var SKILLS = { grammar: { emo: IC("mod-grammar"), en: "Grammar clue", fr: "La nature du mot" }, poly: { emo: IC("mod-poly"), en: "One word, many meanings", fr: "La polysémie" } };
   var SKILL_ORDER = CLUE_ORDER.concat(["grammar", "poly"]);
   function skillInfo(k) { return CLUES[k] || SKILLS[k]; }
 
@@ -8563,18 +8568,18 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
   ];
 
   var BADGES = [
-    { id: "first", e: "🛰️", n: "First Scan", d: "Terminer un premier exercice" },
-    { id: "grad", e: "🎓", n: "5-Step Graduate", d: "Terminer THE 5 STEPS" },
+    { id: "first", e: "🛰️", img: "img/mod-clues.webp", n: "First Scan", d: "Terminer un premier exercice" },
+    { id: "grad", e: "🎓", img: "img/mod-steps.webp", n: "5-Step Graduate", d: "Terminer THE 5 STEPS" },
     { id: "definition", e: "📖", img: "img/clue-definition.webp", n: "Definition Decoder", d: "Maîtrise 70 % : Definition clue" },
     { id: "example", e: "🧩", img: "img/clue-example.webp", n: "Example Spotter", d: "Maîtrise 70 % : Example clue" },
     { id: "contrast", e: "⚖️", img: "img/clue-contrast.webp", n: "Contrast Master", d: "Maîtrise 70 % : Contrast clue" },
     { id: "situation", e: "🎬", img: "img/clue-situation.webp", n: "Scene Reader", d: "Maîtrise 70 % : Situation clue" },
     { id: "wordparts", e: "🔬", img: "img/clue-wordparts.webp", n: "Word Surgeon", d: "Maîtrise 70 % : Word parts" },
     { id: "cognates", e: "🎯", img: "img/clue-cognates.webp", n: "False Friend Hunter", d: "Maîtrise 70 % : Cognates & false friends" },
-    { id: "grammar", e: "📡", n: "Grammar Radar", d: "Maîtrise 70 % : nature du mot" },
-    { id: "poly", e: "🌈", n: "Many-Meaning Mind", d: "Maîtrise 70 % : polysémie" },
-    { id: "myst3", e: "🔓", n: "Mystery Cracker", d: "Terminer 3 Mystery Texts" },
-    { id: "myst6", e: "💠", n: "Code Breaker", d: "Terminer 6 Mystery Texts" },
+    { id: "grammar", e: "📡", img: "img/mod-grammar.webp", n: "Grammar Radar", d: "Maîtrise 70 % : nature du mot" },
+    { id: "poly", e: "🌈", img: "img/mod-poly.webp", n: "Many-Meaning Mind", d: "Maîtrise 70 % : polysémie" },
+    { id: "myst3", e: "🔓", img: "img/mod-texts.webp", n: "Mystery Cracker", d: "Terminer 3 Mystery Texts" },
+    { id: "myst6", e: "💠", img: "img/badge-unlock.webp", n: "Code Breaker", d: "Terminer 6 Mystery Texts" },
     { id: "honest", e: "🪞", n: "Honest Scanner", d: "S'autoévaluer 10 fois" },
     { id: "nohint", e: "⚡", n: "No-Hint Hero", d: "10 exercices de suite sans indice" },
     { id: "full", e: "🌟", n: "Full Spectrum", d: "Les 8 jauges à 50 % ou plus" }
@@ -8805,19 +8810,19 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     h += "</div>";
     if (!S.level) { return h + "<p class='muted' style='text-align:center;margin-top:18px'>Touche ton niveau pour allumer le décodeur.</p>" + foot(); }
     h += "<h2 class='sec'><span class='n'>2</span>Choisis ton espace</h2><div class='grid'>";
-    h += "<button class='card big c-cyan' data-act='go' data-a='tutorial'><span class='emo'>🚦</span><span><span class='tag'>" + (S.tut ? "✓ Terminé" : "Commence ici") + "</span><h3>THE 5 STEPS</h3><p>Le tutoriel : la méthode en 5 étapes pour décoder n'importe quel mot. À faire en premier !</p></span></button>";
+    h += "<button class='card big c-cyan' data-act='go' data-a='tutorial'><span class='emo'>" + IC("mod-steps") + "</span><span><span class='tag'>" + (S.tut ? "✓ Terminé" : "Commence ici") + "</span><h3>THE 5 STEPS</h3><p>Le tutoriel : la méthode en 5 étapes pour décoder n'importe quel mot. À faire en premier !</p></span></button>";
     var cTot = 0, cDone = 0;
     each(D.clues.exercises, function (e) { if (e.level === S.level) { cTot++; if (S.done[e.id] != null) { cDone++; } } });
-    h += homeCard("clues", "🔦", "CLUE TRAINING", "6 modules, un par type d'indice : définition, exemple, contraste, situation, morceaux de mots, faux amis.", "c-amber", cDone + " / " + cTot);
+    h += homeCard("clues", IC("mod-clues"), "CLUE TRAINING", "6 modules, un par type d'indice : définition, exemple, contraste, situation, morceaux de mots, faux amis.", "c-amber", cDone + " / " + cTot);
     var gTot = 0, gDone = 0;
     each(D.grammar.sameWord.concat(D.grammar.jabberwocky), function (e) { if (e.level === S.level) { gTot++; if (S.done[e.id] != null) { gDone++; } } });
-    h += homeCard("grammar", "📡", "GRAMMAR CLUE", "La nature du mot comme indice : un même mot, plusieurs métiers, et le Jabberwocky test.", "c-violet", gDone + " / " + gTot);
+    h += homeCard("grammar", IC("mod-grammar"), "GRAMMAR CLUE", "La nature du mot comme indice : un même mot, plusieurs métiers, et le Jabberwocky test.", "c-violet", gDone + " / " + gTot);
     var pTot = 0, pDone = 0;
     each(D.poly.words, function (e) { if (e.level !== S.level) { return; } pTot++; if (S.done[e.id] != null) { pDone++; } });
-    h += homeCard("polyhub", "🌈", "ONE WORD, MANY MEANINGS", "bank, light, match, ring… Un seul mot, plusieurs sens : relie chaque phrase au bon.", "c-mint", pDone + " / " + pTot);
+    h += homeCard("polyhub", IC("mod-poly"), "ONE WORD, MANY MEANINGS", "bank, light, match, ring… Un seul mot, plusieurs sens : relie chaque phrase au bon.", "c-mint", pDone + " / " + pTot);
     var tTot = 0, tDone = 0;
     each(D.texts.texts, function (e) { if (e.level === S.level) { tTot++; if (S.done[e.id] != null) { tDone++; } } });
-    h += homeCard("texts", "🛸", "MYSTERY TEXTS", "L'épreuve finale : des textes avec des mots inconnus, tous indices confondus.", "c-coral", tDone + " / " + tTot);
+    h += homeCard("texts", IC("mod-texts"), "MYSTERY TEXTS", "L'épreuve finale : des textes avec des mots inconnus, tous indices confondus.", "c-coral", tDone + " / " + tTot);
     h += "</div>";
     if (SES.n > 0) { h += "<div class='row' style='margin-top:18px'><button class='btn violet' data-act='go' data-a='summary'>📋 Bilan de ma session (" + SES.n + ")</button></div>"; }
     return h + foot();
@@ -8830,7 +8835,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
 
   /* ========== CLUE TRAINING ========== */
   function viewClues() {
-    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>🔦 CLUE TRAINING</h2><p class='muted'>Un module par type d'indice. Chaque jauge mesure ta maîtrise de la stratégie, pas le nombre de mots appris.</p><div class='grid'>";
+    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>" + IC("mod-clues") + " CLUE TRAINING</h2><p class='muted'>Un module par type d'indice. Chaque jauge mesure ta maîtrise de la stratégie, pas le nombre de mots appris.</p><div class='grid'>";
     each(CLUE_ORDER, function (k) {
       var c = CLUES[k], tot = 0, dn = 0;
       each(D.clues.exercises, function (e) { if (e.clueType === k && e.level === S.level) { tot++; if (S.done[e.id] != null) { dn++; } } });
@@ -8843,7 +8848,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     var k = V.p.a, c = CLUES[k];
     if (!X) { X = { lvl: S.level }; }
     var h = backBtn("clues", null, "CLUE TRAINING");
-    h += "<div class='panel'><h3>" + c.emo + " " + esc(c.en) + "</h3><p>" + esc(c.intro) + "</p><p class='verify' style='font-size:1.05em'><b>Exemple :</b> " + esc(c.ex) + "</p><p class='small muted'>🔦 " + esc(c.look) + "</p></div>";
+    h += "<div class='panel'><h3>" + c.emo + " " + esc(c.en) + "</h3><p>" + esc(c.intro) + "</p><p class='verify' style='font-size:1.05em'><b>Exemple :</b> " + esc(c.ex) + "</p><p class='small muted'>" + IC("step2") + " " + esc(c.look) + "</p></div>";
     h += levelTabs(X.lvl, "modlvl", k) + "<div class='exlist'>";
     var n = 0;
     each(D.clues.exercises, function (e) {
@@ -8903,11 +8908,11 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
   }
   function hintBlock(E) {
     var h = "<div class='row' style='justify-content:space-between'><span class='muted small'>" + (E.tut ? "" : esc(STEPS[E.step - 1].long)) + "</span>";
-    if (!E.finished && !E.tut) { h += "<button class='btn ghost' data-act='hint'>💡 Indice" + (E.hints ? " (" + E.hints + "/5)" : "") + "</button>"; }
+    if (!E.finished && !E.tut) { h += "<button class='btn ghost' data-act='hint'>" + IC("step4") + " Indice" + (E.hints ? " (" + E.hints + "/5)" : "") + "</button>"; }
     h += "</div>";
     if (E.hintOpen && E.hints) {
       var list = exHints(E), i;
-      h += "<div class='hintbox'><b>💡 Les étapes, une par une</b><ol>";
+      h += "<div class='hintbox'><b>" + IC("step4") + " Les étapes, une par une</b><ol>";
       for (i = 0; i < E.hints && i < list.length; i++) { h += "<li>" + esc(list[i]) + "</li>"; }
       h += "</ol>" + (E.hints < 5 ? "<button class='btn ghost' data-act='hint'>Indice suivant</button>" : "") + "</div>";
     }
@@ -8917,7 +8922,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     if (!E.tut || !D.tuto || !D.tuto.lessons) { return ""; }
     var L = D.tuto.lessons[n - 1];
     if (!L) { return ""; }
-    return "<div class='panel c-cyan' style='border-color:var(--cyan)'><h3>" + esc(L.title) + "</h3><p>" + esc(L.text) + "</p>" + (L.tip ? "<p class='small muted'>👉 " + esc(L.tip) + "</p>" : "") + "</div>";
+    return "<div class='panel c-cyan' style='border-color:var(--cyan)'><h3>" + stepTitle(L.title) + "</h3><p>" + esc(L.text) + "</p>" + (L.tip ? "<p class='small muted'>👉 " + esc(L.tip) + "</p>" : "") + "</div>";
   }
   function exPanel(E) {
     var ex = E.ex, h = "";
@@ -9060,27 +9065,27 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     if (!D.tuto) { return ""; }
     if (!X) { X = newEx(D.tuto.exercise, true); }
     var E = X;
-    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>🚦 THE 5 STEPS</h2>";
+    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>" + IC("mod-steps") + " THE 5 STEPS</h2>";
     if (!E.finished && E.step === 1) { h += "<div class='panel'><p>" + esc(D.tuto.intro) + "</p>" + principle() + "</div>"; }
     h += stepsBar(E.finished ? 6 : E.step, E.finished ? 5 : 0);
     h += exPanel(E);
     return h;
   }
   function tutoRecap() {
-    var h = "<div class='panel'><h3>🎓 Bravo, tu connais la méthode !</h3><ol>";
+    var h = "<div class='panel'><h3>" + IC("step5") + " Bravo, tu connais la méthode !</h3><ol>";
     each(STEPS, function (s) { h += "<li><b>" + esc(s.t) + "</b> — " + esc(s.long) + "</li>"; });
     h += "</ol><p>" + esc(D.tuto.outro) + "</p>" + principle();
     h += "<p class='small muted'>Ces 5 étapes restent affichées en haut de chaque exercice, comme une barre de progression.</p>";
-    h += "<div class='row'><button class='btn cyan' data-act='go' data-a='clues'>🔦 CLUE TRAINING →</button><button class='btn ghost' data-act='go' data-a='grammar'>📡 GRAMMAR CLUE</button><button class='btn ghost' data-act='retuto'>↺ Refaire</button></div></div>";
+    h += "<div class='row'><button class='btn cyan' data-act='go' data-a='clues'>" + IC("mod-clues") + " CLUE TRAINING →</button><button class='btn ghost' data-act='go' data-a='grammar'>" + IC("mod-grammar") + " GRAMMAR CLUE</button><button class='btn ghost' data-act='retuto'>↺ Refaire</button></div></div>";
     return h;
   }
 
   /* ========== GRAMMAR CLUE ========== */
   function viewGrammar() {
     if (!X) { X = { tab: V.p.a || "same", lvl: S.level }; }
-    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>📡 GRAMMAR CLUE</h2>";
+    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>" + IC("mod-grammar") + " GRAMMAR CLUE</h2>";
     h += "<div class='panel'><p>" + esc(D.grammar.intro) + "</p><div class='meta'><span>🟦 Nom</span><span>🟥 Verbe</span><span>🟪 Adjectif</span><span>🟩 Adverbe</span></div>" + meter(mastery("grammar")) + "<p class='small muted'>Maîtrise « nature du mot » : " + mastery("grammar") + " %</p></div>";
-    h += "<div class='tabs'><button class='tab" + (X.tab === "same" ? " on" : "") + "' data-act='gtab' data-a='same'>🔁 Same word, different jobs</button><button class='tab" + (X.tab === "jab" ? " on" : "") + "' data-act='gtab' data-a='jab'>👾 Jabberwocky test</button></div>";
+    h += "<div class='tabs'><button class='tab" + (X.tab === "same" ? " on" : "") + "' data-act='gtab' data-a='same'>🔁 Same word, different jobs</button><button class='tab" + (X.tab === "jab" ? " on" : "") + "' data-act='gtab' data-a='jab'>" + IC("mod-jabber") + " Jabberwocky test</button></div>";
     h += levelTabs(X.lvl, "glvl");
     var list = X.tab === "same" ? D.grammar.sameWord : D.grammar.jabberwocky, n = 0;
     h += "<div class='exlist'>";
@@ -9130,7 +9135,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     if (!j) { return ""; }
     if (!X) { X = { j: j, active: null, a: {}, f: null }; }
     var h = backBtn("grammar", "jab", "GRAMMAR CLUE");
-    h += "<div class='panel'><h3>👾 Jabberwocky test</h3><p class='small'>Ces mots violets n'existent pas ! Pourtant, leur <b>place</b> et leurs <b>terminaisons</b> te disent s'ils sont nom, verbe, adjectif ou adverbe. Touche chaque mot inventé.</p>";
+    h += "<div class='panel'><h3>" + IC("mod-jabber") + " Jabberwocky test</h3><p class='small'>Ces mots violets n'existent pas ! Pourtant, leur <b>place</b> et leurs <b>terminaisons</b> te disent s'ils sont nom, verbe, adjectif ou adverbe. Touche chaque mot inventé.</p>";
     var toks = tokenize(j.s), wmap = {};
     each(j.words, function (w, i) { wmap[w.w] = i; });
     h += "<div class='jab' lang='en'>";
@@ -9161,13 +9166,13 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
   }
   function posWrongMsg(p, sentence, word) {
     var i = findWord(sentence, word), pw = i >= 0 ? prevWord(sentence, i) : "", en = ending(word);
-    return "❌ <b>Pas " + POS[p].fr.toLowerCase() + ".</b> " + esc(POS[p].not) + " 🔦 Regarde" + (pw ? " le mot juste avant (« " + esc(pw) + " »)" : " la place du mot") + (en ? " et la terminaison « " + esc(en) + " »" : "") + ".";
+    return "❌ <b>Pas " + POS[p].fr.toLowerCase() + ".</b> " + esc(POS[p].not) + " " + IC("step2") + " Regarde" + (pw ? " le mot juste avant (« " + esc(pw) + " »)" : " la place du mot") + (en ? " et la terminaison « " + esc(en) + " »" : "") + ".";
   }
 
   /* ========== POLYSÉMIE ========== */
   function viewPolyHub() {
     if (!X) { X = { lvl: S.level }; }
-    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>🌈 ONE WORD, MANY MEANINGS</h2>";
+    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>" + IC("mod-poly") + " ONE WORD, MANY MEANINGS</h2>";
     h += "<div class='panel'><p>" + esc(D.poly.intro) + "</p>" + meter(mastery("poly")) + "<p class='small muted'>Maîtrise polysémie : " + mastery("poly") + " %</p></div>";
     h += levelTabs(X.lvl, "plvl") + "<div class='grid'>";
     var n = 0;
@@ -9226,7 +9231,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
   /* ========== MYSTERY TEXTS ========== */
   function viewTexts() {
     if (!X) { X = { lvl: S.level }; }
-    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>🛸 MYSTERY TEXTS</h2>";
+    var h = backBtn("home", null, "Accueil") + "<h2 class='sec'>" + IC("mod-texts") + " MYSTERY TEXTS</h2>";
     h += "<div class='panel'><p>" + esc(D.texts.intro) + "</p></div>";
     h += levelTabs(X.lvl, "tlvl") + "<div class='exlist'>";
     var n = 0;
@@ -9374,7 +9379,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     var use = [];
     each(SKILL_ORDER, function (k) { var n = (SES.used[k] || 0) + (SES.decl[k] || 0); if (n) { use.push({ k: k, n: n }); } });
     use.sort(function (a, b) { return b.n - a.n; });
-    h += "<div class='panel'><h3>🔦 Tes indices les plus utilisés</h3>";
+    h += "<div class='panel'><h3>" + IC("mod-clues") + " Tes indices les plus utilisés</h3>";
     if (!use.length) { h += "<p class='muted'>—</p>"; }
     each(use.slice(0, 3), function (u) { var i = skillInfo(u.k); h += "<p>" + i.emo + " <b>" + esc(i.en) + "</b> — " + u.n + " fois</p>"; });
     h += "</div>";
@@ -9463,7 +9468,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
         E.f = { k: "ko", h: "❌ <b>" + (inside ? "Trop de mots qui n'aident pas." : "Ces mots ne t'aident pas vraiment à deviner le sens.") + "</b> " + esc(CLUES[ex.clueType].look) };
       } else {
         E.res.clue = 0; E.lit = true; E.sel = {};
-        E.f = { k: "info", h: "🔦 <b>Voici l'indice qui s'allume :</b> " + esc(ex.clueWhy) };
+        E.f = { k: "info", h: IC("step2") + " <b>Voici l'indice qui s'allume :</b> " + esc(ex.clueWhy) };
       }
     }
     render();
@@ -9607,7 +9612,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     } else {
       st.tries.clue++; st.cluePicked[k] = 1;
       if (st.tries.clue < 2) { st.f = { k: "ko", h: "❌ <b>Pas vraiment.</b> " + esc(CLUES[k].not) + " Essaie un autre type d'indice." }; }
-      else { st.res.clue = 0; st.lit = true; st.f = { k: "info", h: "🔦 L'indice le plus utile ici : <b>" + CLUES[w.clueType].emo + " " + esc(CLUES[w.clueType].en) + "</b>. Il s'allume dans le texte." }; }
+      else { st.res.clue = 0; st.lit = true; st.f = { k: "info", h: IC("step2") + " L'indice le plus utile ici : <b>" + CLUES[w.clueType].emo + " " + esc(CLUES[w.clueType].en) + "</b>. Il s'allume dans le texte." }; }
     }
     render();
   };

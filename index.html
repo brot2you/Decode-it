@@ -11,7 +11,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Chakra+Petch:wght@600;700&family=Lexend:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5/400.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5/700.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2314213d'/%3E%3Crect x='10' y='29' width='44' height='6' rx='3' fill='%2300b8d9'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%2305a67a' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:image" content="img/app-icon.webp">
 <style>
 :root{
   --bg:#eef4f9; --bg2:#ffffff; --ink:#14213d; --ink2:#46546e; --line:#d5e1ec;
@@ -239,6 +242,23 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+
+/* === Visuels BROT2YOU (nov. 2026) === */
+.ic{display:inline-block;height:1.35em;width:auto;vertical-align:-.32em;object-fit:contain}
+.card .emo .ic{height:1.6em;vertical-align:middle}
+.card.big .emo .ic{height:1.5em}
+.brand .logo-ic{height:34px;width:auto;display:block}
+.hero.hero-img{display:flex;align-items:center;gap:14px;padding:18px 18px 16px}
+.hero .hero-txt{flex:1 1 auto;min-width:0;position:relative;z-index:1}
+.hero .logo{display:block;width:100%;max-width:520px;height:auto;margin:0 0 4px}
+.hero .mascot{flex:0 0 auto;width:min(34%,230px);height:auto;position:relative;z-index:1;filter:drop-shadow(0 6px 0 rgba(20,33,61,.12))}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:560px){.hero.hero-img{flex-direction:column-reverse;text-align:center}.hero .logo{margin:0 auto 4px}.hero .mascot{width:42%}}
+.badge .frame{position:relative;width:86px;height:86px;margin:0 auto 6px;display:grid;place-items:center;background:url(img/badge-frame.webp) center/contain no-repeat}
+.badge .frame .e{font-size:1.75em;line-height:1;filter:grayscale(1);opacity:.4}
+.badge .frame .e .ic{height:1.5em;vertical-align:middle}
+.badge:not(.got) .frame{filter:grayscale(1);opacity:.55}
+.badge.got .frame .e{filter:none;opacity:1}
 </style>
 </head>
 <body>
@@ -8486,32 +8506,32 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
   var LEVEL_CECRL = { "6e": "A1", "5e": "A1+ / A2", "4e": "A2", "3e": "A2+ / B1" };
 
   var CLUES = {
-    definition: { emo: "📖", en: "Definition clue", fr: "Le mot est expliqué dans la phrase",
+    definition: { emo: "<img class=\'ic\' src=\'img/clue-definition.webp\' alt=\'\'>", en: "Definition clue", fr: "Le mot est expliqué dans la phrase",
       look: "Cherche une explication collée au mot : une virgule, des tirets, « or », « which is », « that is », « means », « called ».",
       not: "Pour un indice de définition, la phrase devrait expliquer le mot directement (après une virgule, « or », « which is », « means »…). Ici, on ne trouve pas d'explication de ce genre.",
       intro: "Parfois, l'auteur explique lui-même le mot difficile : juste après une virgule, entre tirets, ou avec « or », « which is », « that is », « means », « is called ».",
       ex: "We found a burrow, a hole where rabbits live, near the river." },
-    example: { emo: "🧩", en: "Example clue", fr: "Des exemples montrent de quoi il s'agit",
+    example: { emo: "<img class=\'ic\' src=\'img/clue-example.webp\' alt=\'\'>", en: "Example clue", fr: "Des exemples montrent de quoi il s'agit",
       look: "Cherche « such as », « like », « for example », « including » : les exemples qui suivent appartiennent à la même famille que le mot.",
       not: "Pour un indice d'exemple, il faudrait « such as », « like », « for example » ou « including » suivis d'une liste. Ce n'est pas le cas ici.",
       intro: "Les mots « such as », « like », « for example », « including » annoncent des exemples. Si tu connais les exemples, tu devines la catégorie : le mot inconnu est leur « famille ».",
       ex: "I love citrus fruits, such as oranges, lemons and grapefruits." },
-    contrast: { emo: "⚖️", en: "Contrast clue", fr: "Le contraire est dans la phrase",
+    contrast: { emo: "<img class=\'ic\' src=\'img/clue-contrast.webp\' alt=\'\'>", en: "Contrast clue", fr: "Le contraire est dans la phrase",
       look: "Cherche « but », « however », « unlike », « although », « instead of », « whereas » : le mot veut dire le contraire de l'autre partie.",
       not: "Un indice de contraste suppose un mot d'opposition (but, however, unlike, although…) qui oppose le mot à son contraire. Ici, il n'y a pas d'opposition autour du mot.",
       intro: "Avec « but », « however », « unlike », « although », « instead of », la phrase oppose deux idées. Si tu comprends un côté, le mot inconnu veut dire… le contraire !",
       ex: "He was rich, but his brother was penniless." },
-    situation: { emo: "🎬", en: "Situation clue", fr: "La scène et la logique te guident",
+    situation: { emo: "<img class=\'ic\' src=\'img/clue-situation.webp\' alt=\'\'>", en: "Situation clue", fr: "La scène et la logique te guident",
       look: "Imagine la scène : où ? quand ? qu'est-ce qui se passe avant et après ? Quel sens est logique dans cette situation ?",
       not: "Un indice de situation, c'est la logique de la scène. Ici, la scène seule ne suffit pas : un autre indice, plus précis, est disponible dans le texte ou dans le mot lui-même.",
       intro: "Aucun mot-signal ? Imagine la scène comme un film : le lieu, le moment, les réactions des personnages. Le sens doit être logique dans cette situation.",
       ex: "He was shivering in the snow." },
-    wordparts: { emo: "🔬", en: "Word parts", fr: "Le mot se découpe en morceaux connus",
+    wordparts: { emo: "<img class=\'ic\' src=\'img/clue-wordparts.webp\' alt=\'\'>", en: "Word parts", fr: "Le mot se découpe en morceaux connus",
       look: "Découpe le mot : un préfixe au début (un-, dis-, re-, mis-, over-), un suffixe à la fin (-ful, -less, -able, -er, -ness, -ly), ou deux mots collés.",
       not: "Pour cet indice, il faudrait pouvoir découper le mot en morceaux connus (préfixe, base, suffixe, mots collés). Ici, le mot ne se découpe pas de façon utile.",
       intro: "Beaucoup de mots anglais sont des « Lego » : préfixe + base + suffixe (un-help-ful), ou deux mots collés (sun + flower). Découpe, traduis chaque morceau, recolle !",
       ex: "unbreakable = un (pas) + break (casser) + able (qu'on peut)" },
-    cognates: { emo: "🎯", en: "Cognates & false friends", fr: "Mots transparents… et faux amis",
+    cognates: { emo: "<img class=\'ic\' src=\'img/clue-cognates.webp\' alt=\'\'>", en: "Cognates & false friends", fr: "Mots transparents… et faux amis",
       look: "Le mot ressemble à un mot français ? Bonne piste… mais vérifie avec le reste de la phrase : c'est peut-être un faux ami !",
       not: "Pour cet indice, le mot devrait ressembler à un mot français (mot transparent ou faux ami). Ici, il ne ressemble à aucun mot français utile.",
       intro: "Beaucoup de mots anglais ressemblent au français : ce sont des mots transparents (animal, museum, delicious). Mais attention aux faux amis : « library » n'est pas une librairie ! On vérifie toujours avec la phrase.",
@@ -8545,12 +8565,12 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
   var BADGES = [
     { id: "first", e: "🛰️", n: "First Scan", d: "Terminer un premier exercice" },
     { id: "grad", e: "🎓", n: "5-Step Graduate", d: "Terminer THE 5 STEPS" },
-    { id: "definition", e: "📖", n: "Definition Decoder", d: "Maîtrise 70 % : Definition clue" },
-    { id: "example", e: "🧩", n: "Example Spotter", d: "Maîtrise 70 % : Example clue" },
-    { id: "contrast", e: "⚖️", n: "Contrast Master", d: "Maîtrise 70 % : Contrast clue" },
-    { id: "situation", e: "🎬", n: "Scene Reader", d: "Maîtrise 70 % : Situation clue" },
-    { id: "wordparts", e: "🔬", n: "Word Surgeon", d: "Maîtrise 70 % : Word parts" },
-    { id: "cognates", e: "🎯", n: "False Friend Hunter", d: "Maîtrise 70 % : Cognates & false friends" },
+    { id: "definition", e: "📖", img: "img/clue-definition.webp", n: "Definition Decoder", d: "Maîtrise 70 % : Definition clue" },
+    { id: "example", e: "🧩", img: "img/clue-example.webp", n: "Example Spotter", d: "Maîtrise 70 % : Example clue" },
+    { id: "contrast", e: "⚖️", img: "img/clue-contrast.webp", n: "Contrast Master", d: "Maîtrise 70 % : Contrast clue" },
+    { id: "situation", e: "🎬", img: "img/clue-situation.webp", n: "Scene Reader", d: "Maîtrise 70 % : Situation clue" },
+    { id: "wordparts", e: "🔬", img: "img/clue-wordparts.webp", n: "Word Surgeon", d: "Maîtrise 70 % : Word parts" },
+    { id: "cognates", e: "🎯", img: "img/clue-cognates.webp", n: "False Friend Hunter", d: "Maîtrise 70 % : Cognates & false friends" },
     { id: "grammar", e: "📡", n: "Grammar Radar", d: "Maîtrise 70 % : nature du mot" },
     { id: "poly", e: "🌈", n: "Many-Meaning Mind", d: "Maîtrise 70 % : polysémie" },
     { id: "myst3", e: "🔓", n: "Mystery Cracker", d: "Terminer 3 Mystery Texts" },
@@ -8736,7 +8756,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     document.documentElement.style.setProperty("--fs", (S.settings.size || 18) + "px");
   }
   function renderTop() {
-    var h = "<div class='in'><button class='brand' data-act='go' data-a='home' aria-label='Accueil DECODE IT'><span class='dot'></span>DECODE IT!</button><span class='sp'></span>";
+    var h = "<div class='in'><button class='brand' data-act='go' data-a='home' aria-label='Accueil DECODE IT'><img class='logo-ic' src='img/scanner.webp' alt=''>DECODE IT!</button><span class='sp'></span>";
     if (S.level) { h += "<button class='chip' data-act='go' data-a='home' aria-label='Changer de niveau'>🎚️ " + esc(S.level) + "</button>"; }
     h += "<button class='iconbtn' data-act='go' data-a='progress' aria-label='Ma progression'>📊</button>";
     h += "<button class='iconbtn' data-act='settings' aria-label='Réglages'>⚙️</button></div>";
@@ -8777,8 +8797,8 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
 
   /* ========== ACCUEIL ========== */
   function viewHome() {
-    var h = "<div class='hero'><div class='beam'></div><h1>DECODE <span class='x'>IT!</span></h1>";
-    h += "<p class='slogan'>Don't know the word? Find the clues.</p><div class='sig'>by BROT2YOU</div></div>";
+    var h = "<div class='hero hero-img'><div class='beam'></div><div class='hero-txt'><h1 class='sr'>DECODE IT! by BROT2YOU</h1><img class='logo' src='img/logo.webp' alt='DECODE IT! by Brot2you' width='1100' height='367'>";
+    h += "<p class='slogan'>Don't know the word? Find the clues.</p></div><img class='mascot' src='img/mascot.webp' alt='' width='640' height='640'></div>";
     h += principle();
     h += "<h2 class='sec'><span class='n'>1</span>Choisis ton niveau</h2><div class='levels'>";
     each(LEVELS, function (l) { h += "<button class='lvl" + (S.level === l ? " on" : "") + "' data-act='level' data-a='" + l + "'>" + l + "<small>" + LEVEL_CECRL[l] + "</small></button>"; });
@@ -8823,7 +8843,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
     var k = V.p.a, c = CLUES[k];
     if (!X) { X = { lvl: S.level }; }
     var h = backBtn("clues", null, "CLUE TRAINING");
-    h += "<div class='panel'><h3>" + c.emo + " " + esc(c.en) + "</h3><p>" + esc(c.intro) + "</p><p class='verify' style='font-size:1.05em'><b>Exemple :</b> " + esc(c.ex) + "</p><p class='small muted'>🔎 " + esc(c.look) + "</p></div>";
+    h += "<div class='panel'><h3>" + c.emo + " " + esc(c.en) + "</h3><p>" + esc(c.intro) + "</p><p class='verify' style='font-size:1.05em'><b>Exemple :</b> " + esc(c.ex) + "</p><p class='small muted'>🔦 " + esc(c.look) + "</p></div>";
     h += levelTabs(X.lvl, "modlvl", k) + "<div class='exlist'>";
     var n = 0;
     each(D.clues.exercises, function (e) {
@@ -9141,7 +9161,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
   }
   function posWrongMsg(p, sentence, word) {
     var i = findWord(sentence, word), pw = i >= 0 ? prevWord(sentence, i) : "", en = ending(word);
-    return "❌ <b>Pas " + POS[p].fr.toLowerCase() + ".</b> " + esc(POS[p].not) + " 🔎 Regarde" + (pw ? " le mot juste avant (« " + esc(pw) + " »)" : " la place du mot") + (en ? " et la terminaison « " + esc(en) + " »" : "") + ".";
+    return "❌ <b>Pas " + POS[p].fr.toLowerCase() + ".</b> " + esc(POS[p].not) + " 🔦 Regarde" + (pw ? " le mot juste avant (« " + esc(pw) + " »)" : " la place du mot") + (en ? " et la terminaison « " + esc(en) + " »" : "") + ".";
   }
 
   /* ========== POLYSÉMIE ========== */
@@ -9342,7 +9362,7 @@ textarea,input[type=text]{width:100%;font:inherit;font-size:1.05em;border:3px so
       h += "<div class='gauge'><div class='h'><span>" + i.emo + " " + esc(i.en) + "</span><span>" + m + " %</span></div>" + meter(m) + "<p class='small muted' style='margin:6px 0 0'>" + esc(i.fr) + " · " + n + " essai" + (n > 1 ? "s" : "") + "</p></div>";
     });
     h += "</div><h2 class='sec'>🏅 Badges de stratégie</h2><div class='badges'>";
-    each(BADGES, function (b) { var g = !!S.badges[b.id]; h += "<div class='badge" + (g ? " got" : "") + "'><div class='e'>" + b.e + "</div><b>" + esc(b.n) + "</b><span>" + esc(b.d) + "</span></div>"; });
+    each(BADGES, function (b) { var g = !!S.badges[b.id]; h += "<div class='badge" + (g ? " got" : "") + "'><div class='frame'><div class='e'>" + (b.img ? "<img class='ic' src='" + b.img + "' alt=''>" : b.e) + "</div></div><b>" + esc(b.n) + "</b><span>" + esc(b.d) + "</span></div>"; });
     h += "</div><div class='row' style='margin-top:18px'><button class='btn violet' data-act='go' data-a='summary'>📋 Bilan de session</button></div>";
     return h;
   }
